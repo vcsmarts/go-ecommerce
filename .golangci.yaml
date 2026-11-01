@@ -1,0 +1,28 @@
+version: "2"
+
+linters:
+  # errcheck, govet, ineffassign, staticcheck, unused
+  default: standard
+  enable:
+    - bodyclose   # unclosed http.Response.Body
+    - errorlint   # use errors.Is / errors.As, not == or type assertions
+    - noctx       # HTTP requests without a context
+    - gosec       # security scanner
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - std-error-handling
+    rules:
+      - path: _test\.go
+        linters: [gosec]
+
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/vcsmarts/go-ecommerce
