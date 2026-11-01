@@ -1,0 +1,18 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o ./tmp/api ./cmd/api"
+bin = "./tmp/api"
+include_ext = ["go", "sql", "toml", "env"]
+exclude_dir = ["tmp", "bin", "vendor", "docs"]
+delay = 500          # ms to wait after a change before rebuilding
+stop_on_error = true # keep the old binary running if the build fails
+send_interrupt = true
+kill_delay = "500ms"
+
+[log]
+time = false
+
+[misc]
+clean_on_exit = true
