@@ -17,7 +17,7 @@ services:
       retries: 10
 
   localstack:
-    image: localstack/localstack:2026.10.4
+    image: localstack/localstack:4.12
     container_name: shop-localstack
     environment:
       SERVICES: s3,sqs
@@ -29,7 +29,7 @@ services:
     volumes:
       - ./localstack-init:/etc/localstack/init/ready.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf localhost:4566/_localstack/health | grep -q '\"s3\": \"available\"'"]
+      test: ["CMD-SHELL", "curl -sf localhost:4566/_localstack/health | grep -qE '\"s3\": \"(available|running)\"'"]
       interval: 5s
       timeout: 3s
       retries: 20
